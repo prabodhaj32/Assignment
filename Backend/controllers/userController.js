@@ -1,28 +1,29 @@
-const User = require('../models/User');
-//Reg
-exports.registerUser = async(req,res) => {
-    const{ username,password} = req.body
+import User from '../models/User.js';
 
-    try {
-        const user = new User ({username,password});
-        await user.save();
-        res.status(201).json({ meg: 'User Registerd'});
+// Register
+export const registerUser = async (req, res) => {
+  const { username, password } = req.body;
 
-    } catch (error) {
-          res.status(500).json({ error: err.message });
-        
-    }
+  try {
+    const user = new User({ username, password });
+    await user.save();
+    res.status(201).json({ msg: 'User Registered' });
+  } catch (error) {
+    res.status(500).json({ error: error.message }); 
+  }
 };
 
-//login
-exports.loginUser = async (req,res) => {
-    const { username,password} = req.body;
+// Login
+export const loginUser = async (req, res) => {
+  const { username, password } = req.body;
 
-    try {
-        const user =await User.findOne({ username,password});
-        if(!user) return res.status(400).json ({error:'Invalid credentials'});
-        res.status(200).json({msg:'Login successfully'});
-    } catch (error) {
-        res.status(500).json({error:err.message});
-    }
+  try {
+    const user = await User.findOne({ username, password });
+    if (!user)
+      return res.status(400).json({ error: 'Invalid credentials' });
+
+    res.status(200).json({ msg: 'Login successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message }); 
+  }
 };
