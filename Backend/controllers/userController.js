@@ -1,6 +1,6 @@
 import User from '../models/User.js';
 
-// Register
+// Register User
 export const registerUser = async (req, res) => {
   const { username, password } = req.body;
 
@@ -13,7 +13,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// Login
+// Login User
 export const loginUser = async (req, res) => {
   const { username, password } = req.body;
 
